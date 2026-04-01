@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PA Documentation Checklists</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --surface: #ffffff;
+    --surface2: #f0f3f7;
+    --border: #d0dae8;
+    --border-light: #eaecf0;
+    --text: #1a2535;
+    --text-muted: #7a8fa8;
+    --text-dim: #b0bcc9;
+    --accent: #1c3a5e;
+    --accent-glow: rgba(28,58,94,0.08);
+    --green: #1a7a3a;
+    --green-bg: rgba(46,160,67,0.08);
+    --green-border: rgba(46,160,67,0.35);
+    --amber: #b07a10;
+    --amber-bg: rgba(224,160,48,0.1);
+    --amber-border: rgba(224,160,48,0.4);
+    --red: #c0392b;
+    --red-bg: rgba(192,57,43,0.08);
+    --blue-bg: rgba(28,58,94,0.06);
+    --blue-border: rgba(28,58,94,0.2);
+    --cat-a: #2563eb;
+    --cat-b: #7c3aed;
+    --cat-c: #16a34a;
+    --cat-d: #d97706;
+    --cat-e: #dc2626;
+    --cat-f: #0891b2;
+    --cat-g: #0d9488;
+    --cat-z: #6b7280;
+    --font: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1c3a5e;
+    border-bottom: 1px solid #14294a;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 15px;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+  }
+  .logo span { color: #7aadda; }
+  .divider-v { width: 1px; height: 20px; background: rgba(255,255,255,0.2); }
+  .header-subtitle {
+    font-size: 12px;
+    color: #7aadda;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .header-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-ghost {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; background: rgba(255,255,255,0.08); }
+  .btn-primary {
+    background: #fff;
+    border: 1px solid #fff;
+    color: #1c3a5e;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary:hover { background: #e8f0fa; }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; height: calc(100vh - 60px); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px 0;
+  }
+  .sidebar-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0 16px 8px;
+  }
+  .cat-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: background 0.12s;
+    border-left: 3px solid transparent;
+    position: relative;
+  }
+  .cat-nav-item:hover { background: var(--surface2); }
+  .cat-nav-item.active {
+    background: var(--blue-bg);
+    border-left-color: var(--accent);
+  }
+  .cat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cat-nav-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+  .cat-nav-item.active .cat-nav-label { color: #fff; }
+  .cat-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: var(--surface2);
+    color: var(--text-muted);
+  }
+  .progress-mini {
+    position: absolute;
+    bottom: 0; left: 3px; right: 0;
+    height: 2px;
+    background: var(--border-light);
+  }
+  .progress-mini-fill {
+    height: 100%;
+    background: var(--green);
+    transition: width 0.3s;
+  }
+
+  /* ── MAIN ── */
+  .main { flex: 1; overflow-y: auto; }
+
+  /* ── METADATA PANEL ── */
+  .meta-panel {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 28px;
+  }
+  .meta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .meta-field { display: flex; flex-direction: column; gap: 4px; min-width: 160px; flex: 1; }
+  .meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .meta-input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+  .meta-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .meta-input::placeholder { color: var(--text-dim); }
+
+  /* ── CAT HEADER ── */
+  .cat-header {
+    padding: 24px 28px 16px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cat-title-row { display: flex; align-items: center; gap: 12px; }
+  .cat-letter {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .cat-title-text h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .cat-title-text p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .progress-block { text-align: right; }
+  .progress-pct {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .progress-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .progress-bar {
+    width: 120px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTIONS ── */
+  .checklist-body { padding: 20px 28px 48px; }
+  .section { margin-bottom: 24px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 4px;
+  }
+  .section-icon {
+    width: 6px; height: 6px;
+    border-radius: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .section-progress {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* ── CHECKLIST ITEM ── */
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 10px;
+    border-radius: 6px;
+    transition: background 0.1s;
+    position: relative;
+  }
+  .check-item:hover { background: var(--surface2); }
+  .check-item.submitted { opacity: 0.65; }
+  .check-item.submitted .item-name { text-decoration: line-through; color: var(--text-dim); }
+
+  .item-name {
+    font-size: 13px;
+    color: var(--text);
+    flex: 1;
+    font-weight: 400;
+  }
+
+  .toggle-group { display: flex; gap: 4px; margin-left: auto; }
+
+  .toggle-btn {
+    width: 32px; height: 26px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+  .toggle-btn:hover { border-color: var(--text-muted); color: var(--text); }
+  .toggle-btn.r-active {
+    background: var(--amber-bg);
+    border-color: var(--amber-border);
+    color: var(--amber);
+  }
+  .toggle-btn.s-active {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+    color: var(--green);
+  }
+
+  .status-pill {
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .status-pill.required {
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid var(--amber-border);
+  }
+  .status-pill.submitted {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid var(--green-border);
+  }
+  .status-pill.na {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  /* ── SUBSECTION LABELS ── */
+  .subsection-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    padding: 12px 10px 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .subsection-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  /* ── STATUS LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 28px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border-light);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .header-actions, .toggle-group, .legend, .summary-bar { display: none !important; }
+    .layout { display: block; }
+    .main { overflow: visible; }
+    .header { background: #1c3a5e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cat-section { display: none !important; }
+    .cat-section.active { display: block !important; }
+    .meta-panel { background: #f4f6f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .sidebar { width: 200px; }
+    .meta-row { flex-direction: column; }
+  }
+
+  /* hidden state */
+  .cat-section { display: none; }
+  .cat-section.active { display: block; }
+
+  /* Summary bar */
+  .summary-bar {
+    padding: 10px 28px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .sum-stat { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+  .sum-stat .num { font-family: var(--mono); font-weight: 600; font-size: 14px; }
+  .sum-stat.total .num { color: var(--text); }
+  .sum-stat.req .num { color: var(--amber); }
+  .sum-stat.sub .num { color: var(--green); }
+  .sum-stat .lbl { color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="header-subtitle" style="font-size:13px;font-weight:500;color:#ec6e00">Prepared by Joseph Moore &middot; PA Documentation Checklists</div>
+  </div>
+  <div class="header-actions">
+    <button class="btn-ghost" onclick="resetAll()">Reset All</button>
+    <div style="position:relative;display:inline-block" id="exportMenu">
+      <button class="btn-ghost" onclick="toggleExportMenu()" id="exportBtn">Print / Export ▾</button>
+      <div id="exportDropdown" style="display:none;position:absolute;right:0;top:36px;background:#fff;border:1px solid #d0dae8;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:999;min-width:200px;overflow:hidden">
+        <div style="padding:6px 0">
+          <div style="padding:6px 14px;font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:#7a8fa8">Export</div>
+          <button onclick="printCurrentCat()" style="display:block;width:100%;text-align:left;padding:8px 14px;font-size:13px;color:#1a2535;background:none;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif" onmouseover="this.style.background='#f4f6f9'" onmouseout="this.style.background='none'">Print Current Category</button>
+          <button onclick="printAll()" style="display:block;width:100%;text-align:left;padding:8px 14px;font-size:13px;color:#1a2535;background:none;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif" onmouseover="this.style.background='#f4f6f9'" onmouseout="this.style.background='none'">Print All Categories</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="markAllRequired()">Mark All Required</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section-label">Categories</div>
+    <!-- injected by JS -->
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main" id="main">
+
+    <!-- META PANEL (shared) -->
+    <div class="meta-panel">
+      <div class="meta-row">
+        <div class="meta-field">
+          <label class="meta-label">Applicant Name</label>
+          <input class="meta-input" id="applicantName" type="text" placeholder="Enter applicant name">
+        </div>
+        <div class="meta-field">
+          <label class="meta-label">Disaster Number</label>
+          <input class="meta-input" id="disasterNum" type="text" placeholder="e.g. DR-4785-VA">
+        </div>
+        <div class="meta-field">
+          <label class="meta-label">Date</label>
+          <input class="meta-input" id="date" type="date">
+        </div>
+        <div class="meta-field">
+          <label class="meta-label">Project Reference Number</label>
+          <input class="meta-input" id="projRef" type="text" placeholder="e.g. PW-0042">
+        </div>
+        <div class="meta-field">
+          <label class="meta-label">Program Delivery Manager (PDMG)</label>
+          <input class="meta-input" id="pdmg" type="text" placeholder="PDMG name">
+        </div>
+        <div class="meta-field">
+          <label class="meta-label">Work Completed</label>
+          <input class="meta-input" id="workComp" type="text" placeholder="Brief description">
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <span style="font-weight:600;color:var(--text-muted)">Status:</span>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--text-dim)"></div> Not Required</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div> Required (R)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Submitted (S)</div>
+      <span style="margin-left:auto;font-size:11px;color:var(--text-dim)">Click R to mark required · Click S to mark submitted</span>
+    </div>
+
+    <!-- SUMMARY BAR -->
+    <div class="summary-bar" id="summaryBar">
+      <div class="sum-stat total"><span class="num" id="totalRequired">0</span><span class="lbl">Required</span></div>
+      <div class="sum-stat sub"><span class="num" id="totalSubmitted">0</span><span class="lbl">Submitted</span></div>
+      <div class="sum-stat req"><span class="num" id="totalOutstanding">0</span><span class="lbl">Outstanding</span></div>
+    </div>
+
+    <!-- CATEGORY SECTIONS injected by JS -->
+    <div id="catContent"></div>
+
+  </main>
+</div>
+
+<script>
+const CATS = [
+  {
+    id: 'a', letter: 'A', color: '#58a6ff',
+    title: 'Debris Removal',
+    desc: 'Documentation for debris removal operations',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'other', title: 'Other',
+        items: ['Sample Load Tickets','Debris Monitoring Reports']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Debris Management Plan','Mutual Aid Agreements','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Demonstrating Threat','Marine Vessels','Hazardous Materials','Leaners, Hangers, Stumps']
+      }
+    ]
+  },
+  {
+    id: 'b', letter: 'B', color: '#bc8cff',
+    title: 'Emergency Protective Measures',
+    desc: 'Documentation for emergency protective measure projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'other', title: 'Other',
+        items: ['Sample Load Tickets','Debris Monitoring Reports']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Debris Management Plan','Mutual Aid Agreements','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Demonstrating Threat','Marine Vessels','Hazardous Materials','Leaners, Hangers, Stumps']
+      }
+    ]
+  },
+  {
+    id: 'c', letter: 'C', color: '#3fb950',
+    title: 'Roads, Bridges, and Culverts',
+    desc: 'Documentation for road and bridge repair projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'technical', title: 'Technical Reporting',
+        items: ['Inspection','Other Technical Reports']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Maintenance Records','Damage Description','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Overall Facility','Specific Damages','Work Complete','Pre-Disaster']
+      }
+    ]
+  },
+  {
+    id: 'd', letter: 'D', color: '#e3b341',
+    title: 'Water Control Facilities',
+    desc: 'Documentation for water control facility projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'technical', title: 'Technical Reporting',
+        items: ['Inspection','Other Technical Reports']
+      },
+      {
+        id: 'mitigation', title: 'Mitigation',
+        items: ['Benefit Cost Analysis']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Maintenance Records','Damage Description','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Overall Facility','Specific Damages','Work Complete','Pre-Disaster']
+      }
+    ]
+  },
+  {
+    id: 'e', letter: 'E', color: '#f78166',
+    title: 'Buildings and Equipment',
+    desc: 'Documentation for buildings and equipment projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'technical', title: 'Technical Reporting',
+        items: ['Inspection','Other Technical Reports']
+      },
+      {
+        id: 'mitigation', title: 'Mitigation',
+        items: ['Benefit Cost Analysis']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Maintenance Records','Damage Description','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Overall Facility','Specific Damages','Work Complete','Pre-Disaster']
+      }
+    ]
+  },
+  {
+    id: 'f', letter: 'F', color: '#39d353',
+    title: 'Utilities',
+    desc: 'Documentation for utility infrastructure projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'technical', title: 'Technical Reporting',
+        items: ['Inspection','Other Technical Reports']
+      },
+      {
+        id: 'mitigation', title: 'Mitigation',
+        items: ['Benefit Cost Analysis']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Maintenance Records','Damage Description','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Overall Facility','Specific Damages','Work Complete','Pre-Disaster']
+      }
+    ]
+  },
+  {
+    id: 'g', letter: 'G', color: '#76e3ea',
+    title: 'Parks, Recreation, and Others',
+    desc: 'Documentation for parks and recreation projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      },
+      {
+        id: 'technical', title: 'Technical Reporting',
+        items: ['Inspection','Other Technical Reports']
+      },
+      {
+        id: 'mitigation', title: 'Mitigation',
+        items: ['Benefit Cost Analysis']
+      },
+      {
+        id: 'gen', title: 'General Documentation',
+        items: ['Insurance Policy','Insurance Settlement','Insurance Statement of Loss','Lease or Proof of Ownership','Maintenance Records','Damage Description','Site Location Map (decimal to sixth place)']
+      },
+      {
+        id: 'permits', title: 'Permitting / Environmental / Historic Preservation',
+        items: ['Environmental','Historic Preservation','US Corp of Engineers','US Fish and Wildlife','Natural Resources Conservation Service','Other Permits (e.g. Disposal Site Permit)']
+      },
+      {
+        id: 'photos', title: 'Photographs',
+        items: ['Overall Facility','Specific Damages','Work Complete','Pre-Disaster']
+      }
+    ]
+  },
+  {
+    id: 'z', letter: 'Z', color: '#a5a5a5',
+    title: 'Administrative Cost',
+    desc: 'Documentation for administrative cost projects',
+    sections: [
+      {
+        id: 'fa-labor', title: 'Force Account Labor',
+        items: ['Pay Policy','Overtime Policy (if separate) / Other Payroll Policy','Fringe Benefits Calculations','Work Orders / Activity Logs','Timesheets']
+      },
+      {
+        id: 'fa-equip', title: 'Force Account Equipment',
+        items: ['Equipment List','Usage Records','Rental Contract / Receipt']
+      },
+      {
+        id: 'fa-mat', title: 'Force Account Material',
+        items: ['Material Usage Summary','Receipts']
+      },
+      {
+        id: 'contract', title: 'General Documentation / Contract',
+        items: ['Procurement Policy','Procurement Documentation','Contract','Bid Documents','Invoice(s)']
+      }
+    ]
+  }
+];
+
+// State: { catId_sectionIdx_itemIdx: 'none'|'required'|'submitted' }
+let state = {};
+
+function getItemKey(catId, sectionId, itemIdx) {
+  return `${catId}__${sectionId}__${itemIdx}`;
+}
+
+function getItemState(key) {
+  return state[key] || 'none';
+}
+
+function cycleState(key) {
+  const cur = getItemState(key);
+  if (cur === 'none') state[key] = 'required';
+  else if (cur === 'required') state[key] = 'submitted';
+  else state[key] = 'none';
+  renderItemState(key);
+  updateProgress();
+}
+
+function setItemState(key, val) {
+  state[key] = val;
+  renderItemState(key);
+  updateProgress();
+}
+
+function renderItemState(key) {
+  const rBtn = document.getElementById('r_' + key);
+  const sBtn = document.getElementById('s_' + key);
+  const row = document.getElementById('row_' + key);
+  const pill = document.getElementById('pill_' + key);
+  if (!rBtn) return;
+  const s = getItemState(key);
+  rBtn.classList.toggle('r-active', s === 'required');
+  sBtn.classList.toggle('s-active', s === 'submitted');
+  row.classList.toggle('submitted', s === 'submitted');
+  if (pill) {
+    if (s === 'required') { pill.className = 'status-pill required'; pill.textContent = 'REQ'; }
+    else if (s === 'submitted') { pill.className = 'status-pill submitted'; pill.textContent = 'SUB'; }
+    else { pill.className = 'status-pill na'; pill.textContent = '—'; }
+  }
+}
+
+function updateProgress() {
+  // Per category
+  CATS.forEach(cat => {
+    let req = 0, sub = 0, total = 0;
+    cat.sections.forEach(sec => {
+      sec.items.forEach((_, idx) => {
+        const key = getItemKey(cat.id, sec.id, idx);
+        const s = getItemState(key);
+        total++;
+        if (s === 'required') req++;
+        if (s === 'submitted') sub++;
+      });
+    });
+    const pct = total > 0 ? Math.round((sub / total) * 100) : 0;
+    const pctEl = document.getElementById(`pct_${cat.id}`);
+    const barEl = document.getElementById(`bar_${cat.id}`);
+    const miniEl = document.getElementById(`mini_${cat.id}`);
+    const badgeEl = document.getElementById(`badge_${cat.id}`);
+    if (pctEl) pctEl.textContent = pct + '%';
+    if (barEl) barEl.style.width = pct + '%';
+    if (miniEl) miniEl.style.width = pct + '%';
+    if (badgeEl) badgeEl.textContent = `${sub}/${total}`;
+    // Section progress
+    cat.sections.forEach(sec => {
+      let sr = 0, ss = 0, st = sec.items.length;
+      sec.items.forEach((_, idx) => {
+        const key = getItemKey(cat.id, sec.id, idx);
+        const sv = getItemState(key);
+        if (sv === 'required') sr++;
+        if (sv === 'submitted') ss++;
+      });
+      const spEl = document.getElementById(`secprog_${cat.id}_${sec.id}`);
+      if (spEl) spEl.textContent = `${ss}/${st}`;
+    });
+  });
+
+  // Global summary
+  let totalReq = 0, totalSub = 0;
+  Object.values(state).forEach(v => {
+    if (v === 'required') totalReq++;
+    if (v === 'submitted') totalSub++;
+  });
+  document.getElementById('totalRequired').textContent = totalReq + totalSub;
+  document.getElementById('totalSubmitted').textContent = totalSub;
+  document.getElementById('totalOutstanding').textContent = totalReq;
+}
+
+function resetAll() {
+  if (!confirm('Reset all checklist statuses? This cannot be undone.')) return;
+  state = {};
+  document.querySelectorAll('.toggle-btn').forEach(b => { b.classList.remove('r-active','s-active'); });
+  document.querySelectorAll('.check-item').forEach(r => r.classList.remove('submitted'));
+  document.querySelectorAll('.status-pill').forEach(p => { p.className = 'status-pill na'; p.textContent = '—'; });
+  updateProgress();
+}
+
+function markAllRequired() {
+  const activeCat = document.querySelector('.cat-section.active');
+  if (!activeCat) return;
+  const catId = activeCat.dataset.cat;
+  const cat = CATS.find(c => c.id === catId);
+  cat.sections.forEach(sec => {
+    sec.items.forEach((_, idx) => {
+      const key = getItemKey(catId, sec.id, idx);
+      if (getItemState(key) === 'none') {
+        state[key] = 'required';
+        renderItemState(key);
+      }
+    });
+  });
+  updateProgress();
+}
+
+function switchCat(catId) {
+  document.querySelectorAll('.cat-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.cat-nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('cat_' + catId).classList.add('active');
+  document.getElementById('nav_' + catId).classList.add('active');
+}
+
+// Build UI
+function build() {
+  const sidebar = document.getElementById('sidebar');
+  const content = document.getElementById('catContent');
+
+  // Set today's date
+  document.getElementById('date').valueAsDate = new Date();
+
+  CATS.forEach((cat, ci) => {
+    // Sidebar item
+    const navItem = document.createElement('div');
+    navItem.className = 'cat-nav-item' + (ci === 0 ? ' active' : '');
+    navItem.id = 'nav_' + cat.id;
+    navItem.onclick = () => switchCat(cat.id);
+    navItem.innerHTML = `
+      <div class="cat-dot" style="background:${cat.color}"></div>
+      <span class="cat-nav-label">Cat. ${cat.letter} — ${cat.title.split(',')[0].split(' ').slice(0,3).join(' ')}</span>
+      <span class="cat-badge" id="badge_${cat.id}">0/0</span>
+      <div class="progress-mini"><div class="progress-mini-fill" id="mini_${cat.id}" style="width:0%"></div></div>
+    `;
+    sidebar.appendChild(navItem);
+
+    // Cat section
+    const section = document.createElement('div');
+    section.className = 'cat-section' + (ci === 0 ? ' active' : '');
+    section.id = 'cat_' + cat.id;
+    section.dataset.cat = cat.id;
+
+    let html = `
+      <div class="cat-header">
+        <div class="cat-title-row">
+          <div class="cat-letter" style="background:${cat.color}22;border:1.5px solid ${cat.color}44;color:${cat.color}">${cat.letter}</div>
+          <div class="cat-title-text">
+            <h1>Category ${cat.letter}: ${cat.title}</h1>
+            <p>${cat.desc}</p>
+          </div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-pct" id="pct_${cat.id}">0%</div>
+          <div class="progress-sub">submitted</div>
+          <div class="progress-bar"><div class="progress-bar-fill" id="bar_${cat.id}" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="checklist-body">
+    `;
+
+    cat.sections.forEach(sec => {
+      html += `
+        <div class="section">
+          <div class="section-header">
+            <div class="section-icon" style="background:${cat.color}"></div>
+            <span class="section-title">${sec.title}</span>
+            <span class="section-progress" id="secprog_${cat.id}_${sec.id}">0/${sec.items.length}</span>
+          </div>
+      `;
+      sec.items.forEach((item, idx) => {
+        const key = getItemKey(cat.id, sec.id, idx);
+        html += `
+          <div class="check-item" id="row_${key}">
+            <span class="item-name">${item}</span>
+            <span class="status-pill na" id="pill_${key}">—</span>
+            <div class="toggle-group">
+              <button class="toggle-btn" id="r_${key}" title="Mark Required" onclick="cycleToRequired('${key}')">R</button>
+              <button class="toggle-btn" id="s_${key}" title="Mark Submitted" onclick="cycleToSubmitted('${key}')">S</button>
+            </div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+    });
+
+    html += `</div>`;
+    section.innerHTML = html;
+    content.appendChild(section);
+  });
+
+  updateProgress();
+}
+
+function cycleToRequired(key) {
+  const cur = getItemState(key);
+  if (cur === 'required') state[key] = 'none';
+  else state[key] = 'required';
+  renderItemState(key);
+  updateProgress();
+}
+
+function cycleToSubmitted(key) {
+  const cur = getItemState(key);
+  if (cur === 'submitted') state[key] = 'required';
+  else state[key] = 'submitted';
+  renderItemState(key);
+  updateProgress();
+}
+
+function toggleExportMenu() {
+  const d = document.getElementById('exportDropdown');
+  d.style.display = d.style.display === 'none' ? 'block' : 'none';
+}
+
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('exportMenu');
+  if (menu && !menu.contains(e.target)) {
+    document.getElementById('exportDropdown').style.display = 'none';
+  }
+});
+
+function printCurrentCat() {
+  document.getElementById('exportDropdown').style.display = 'none';
+  // Active cat is already the only one shown in print CSS
+  window.print();
+}
+
+function printAll() {
+  document.getElementById('exportDropdown').style.display = 'none';
+  // Temporarily show all cats, print, then restore
+  const sections = document.querySelectorAll('.cat-section');
+  sections.forEach(s => s.classList.add('print-all'));
+  const style = document.createElement('style');
+  style.id = 'print-all-style';
+  style.textContent = '@media print { .cat-section.print-all { display: block !important; } }';
+  document.head.appendChild(style);
+  window.print();
+  sections.forEach(s => s.classList.remove('print-all'));
+  document.getElementById('print-all-style').remove();
+}
+
+build();
+</script>
+</body>
+</html>
